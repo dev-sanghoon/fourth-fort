@@ -1,0 +1,31 @@
+{
+  "config": {
+    "target": "http://localhost:8080",
+    "phases": [
+      {
+        "duration": 50,
+        "arrivalRate": 20
+      }
+    ],
+    "payload": {
+      "path": "../statics/output/register-targets.csv",
+      "fields": ["email", "password"]
+    }
+  },
+  "scenarios": [
+    {
+      "name": "register new users",
+      "flow": [
+        {
+          "post": {
+            "url": "/users",
+            "json": {
+              "email": "{{ email }}",
+              "password": "{{ password }}"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

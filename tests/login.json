@@ -1,0 +1,44 @@
+{
+  "config": {
+    "target": "http://localhost:8080",
+    "phases": [
+      {
+        "duration": 20,
+        "arrivalRate": 30
+      },
+      {
+        "duration": 10,
+        "arrivalRate": 90
+      },
+      {
+        "duration": 30,
+        "arrivalRate": 40
+      }
+    ],
+    "payload": {
+      "path": "../statics/output/login-targets.csv",
+      "fields": ["email", "password"]
+    }
+  },
+  "scenarios": [
+    {
+      "name": "login and view user profile",
+      "flow": [
+        {
+          "post": {
+            "url": "/users/login",
+            "json": {
+              "email": "{{ email }}",
+              "password": "{{ password }}"
+            }
+          }
+        },
+        {
+          "get": {
+            "url": "/users/{{ email }}"
+          }
+        }
+      ]
+    }
+  ]
+}
